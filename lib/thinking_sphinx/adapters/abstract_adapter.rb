@@ -16,6 +16,8 @@ module ThinkingSphinx
         ThinkingSphinx::MysqlAdapter.new model
       when :postgresql
         ThinkingSphinx::PostgreSQLAdapter.new model
+      when :postgis
+        ThinkingSphinx::PostgreSQLAdapter.new model
       when Class
         adapter.new model
       else
@@ -43,7 +45,8 @@ module ThinkingSphinx
            "ActiveRecord::ConnectionAdapters::Mysql2Adapter",
            "ActiveRecord::ConnectionAdapters::NullDBAdapter"
         :mysql
-      when "ActiveRecord::ConnectionAdapters::PostgreSQLAdapter"
+      when "ActiveRecord::ConnectionAdapters::PostgreSQLAdapter",
+           "ActiveRecord::ConnectionAdapters::PostGISAdapter::MainAdapter"
         :postgresql
       when "ActiveRecord::ConnectionAdapters::JdbcAdapter"
         case model.connection.config[:adapter]
